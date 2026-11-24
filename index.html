@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Название во вкладке браузера (можно менять в любой момент) -->
+    <title>Фиксики — Запчасти для дронов</title>
+    <style>
+        :root {
+            --primary: #fc3f1d;
+            --primary-hover: #e03516;
+            --bg: #f4f5f7;
+            --card-bg: #ffffff;
+            --text: #1f2328;
+        }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; margin: 0; padding: 20px; background: var(--bg); color: var(--text); }
+        .container { max-width: 1100px; margin: 0 auto; }
+        .header { display: flex; flex-wrap: wrap; gap: 15px; justify-content: space-between; align-items: center; background: var(--card-bg); padding: 18px 25px; border-radius: 14px; margin-bottom: 24px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .brand h1 { margin: 0; font-size: 24px; }
+        .brand span { font-size: 13px; color: #666; }
+        .header-actions { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+        .phone-link { text-decoration: none; color: var(--text); font-weight: 600; font-size: 16px; transition: color 0.15s; }
+        .phone-link:hover { color: var(--primary); }
+        .products { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
+        .card { background: var(--card-bg); border-radius: 14px; padding: 16px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 10px rgba(0,0,0,0.05); transition: transform 0.15s; }
+        .card:hover { transform: translateY(-3px); }
+        .card img { width: 100%; height: 190px; object-fit: cover; border-radius: 10px; background: #eee; }
+        .card h3 { margin: 14px 0 8px; font-size: 18px; }
+        .card p { color: #555; font-size: 14px; line-height: 1.4; flex-grow: 1; margin: 0 0 12px; }
+        .price { font-size: 20px; font-weight: 700; margin-bottom: 12px; }
+        .btn { background: var(--primary); color: #fff; border: none; padding: 12px 16px; border-radius: 10px; cursor: pointer; font-size: 15px; font-weight: 600; transition: background 0.15s; }
+        .btn:hover { background: var(--primary-hover); }
+        .btn-secondary { background: #e5e7eb; color: #1f2328; margin-top: 8px; }
+        .btn-secondary:hover { background: #d1d5db; }
+        .footer { text-align: center; margin-top: 40px; padding: 20px; color: #666; font-size: 14px; }
+        
+        /* Модальное окно корзины */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.55); justify-content: center; align-items: center; z-index: 1000; }
+        .modal-content { background: #fff; padding: 25px; border-radius: 16px; width: 90%; max-width: 460px; max-height: 85vh; overflow-y: auto; }
+        .cart-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid #eee; padding-bottom: 10px; font-size: 14px; }
+        .remove-btn { background: none; border: none; color: #d93025; cursor: pointer; font-size: 16px; margin-left: 8px; }
+        .input-group { margin: 12px 0; }
+        .input-group input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; font-size: 14px; }
+        .support-note { font-size: 13px; color: #666; margin-top: 12px; text-align: center; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <div class="brand">
+            <!-- Название магазина в шапке (меняется здесь) -->
+            <h1>Фиксики</h1>
+            <span>Магазин запчастей и комплектующих для дронов</span>
+        </div>
+        <div class="header-actions">
+            <a href="tel:+79384472949" class="phone-link">+7 938 447-29-49</a>
+            <button class="btn" onclick="toggleCart()">Корзина (<span id="cart-count">0</span>)</button>
+        </div>
+    </div>
+
+    <div class="products" id="product-list"></div>
+
+    <div class="footer">
+        Магазин запчастей для дронов «Фиксики» • Телефон для связи: <a href="tel:+79384472949" class="phone-link">+7 938 447-29-49</a>
+    </div>
+</div>
+
+<!-- Окно корзины и оплаты -->
+<div class="modal" id="cart-modal">
+    <div class="modal-content">
+        <h3 style="margin-top: 0;">Ваш заказ в «Фиксиках»</h3>
+        <div id="cart-items"></div>
+        <h4>Итого к оплате: <span id="cart-total">0</span> ₽</h4>
+        
+        <div class="input-group">
+            <input type="text" id="customer-name" placeholder="Ваше имя">
+        </div>
+        <div class="input-group">
+            <input type="tel" id="customer-phone" placeholder="Ваш телефон или Telegram для связи">
+        </div>
+
+        <button class="btn" style="width: 100%;" onclick="checkout()">Оплатить заказ</button>
+        <button class="btn btn-secondary" style="width: 100%;" onclick="toggleCart()">Продолжить покупки</button>
+        
+        <div class="support-note">
+            Вопросы по подбору запчастей: <a href="tel:+79384472949">+7 938 447-29-49</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    // КАТАЛОГ ТОВАРОВ: добавляйте и редактируйте позиции здесь
+    const products = [
+        {
+            id: 1,
+            name: "Бесколлекторный мотор 2207 1950KV",
+            desc: "Надёжный мотор для 5-дюймовых FPV-дронов, вал из титанового сплава, высокая тяга.",
+            price: 1850,
+            img: "https://placeholder.com"
+        },
+        {
+            id: 2,
+            name: "Полетный контроллер F405 + ESC 50A",
+            desc: "Стек 30.5x30.5 мм, поддержка Betaflight и INAV, встроенный барометр и OSD.",
+            price: 5400,
+            img: "https://placeholder.com"
+        },
+        {
+            id: 3,
+            name: "Комплект пропеллеров 51466 (4 шт.)",
+            desc: "Прочный поликарбонат, сбалансированы с завода, 2 CW + 2 CCW.",
+            price: 390,
+            img: "https://placeholder.com"
+        },
+        {
+            id: 4,
+            name: "Видеопередатчик VTX 5.8GHz 1.6W",
+            desc: "Регулируемая мощность 25/400/800/1600 мВт, разъём MMCX, встроенный микрофон.",
+            price: 3200,
+            img: "https://placeholder.com"
+        }
+    ];
+
+    let cart = [];
+
+    function renderProducts() {
+        const list = document.getElementById('product-list');
+        list.innerHTML = products.map(p => `
+            <div class="card">
+                <img src="${p.img}" alt="${p.name}">
+                <h3>${p.name}</h3>
+                <p>${p.desc}</p>
+                <div class="price">${p.price.toLocaleString('ru-RU')} ₽</div>
+                <button class="btn" onclick="addToCart(${p.id})">Добавить в корзину</button>
+            </div>
+        `).join('');
+    }
+
+    function addToCart(id) {
+        const product = products.find(p => p.id === id);
+        cart.push(product);
+        updateCartUI();
+    }
+
+    function updateCartUI() {
+        document.getElementById('cart-count').innerText = cart.length;
+        const itemsContainer = document.getElementById('cart-items');
+        
+        if (cart.length === 0) {
+            itemsContainer.innerHTML = '<p style="color:#777;">Корзина пока пуста</p>';
+        } else {
+            itemsContainer.innerHTML = cart.map((item, index) => `
+                <div class="cart-item">
+                    <span>${item.name}</span>
+                    <span><b>${item.price.toLocaleString('ru-RU')} ₽</b> <button class="remove-btn" onclick="removeFromCart(${index})">✕</button></span>
+                </div>
+            `).join('');
+        }
+        
+        const total = cart.reduce((sum, item) => sum + item.price, 0);
+        document.getElementById('cart-total').innerText = total.toLocaleString('ru-RU');
+    }
+
+    function removeFromCart(index) {
+        cart.splice(index, 1);
+        updateCartUI();
+    }
+
+    function toggleCart() {
+        const modal = document.getElementById('cart-modal');
+        modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
+        updateCartUI();
+    }
+
+    function checkout() {
+        if (cart.length === 0) return alert("Добавьте хотя бы одну запчасть в корзину!");
+        const name = document.getElementById('customer-name').value.trim();
+        const phone = document.getElementById('customer-phone').value.trim();
+        if (!name || !phone) return alert("Укажите имя и контакт для связи!");
+
+        const total = cart.reduce((sum, item) => sum + item.price, 0);
+        
+        // СЮДА ПОДКЛЮЧАЕТСЯ РЕАЛЬНАЯ ССЫЛКА НА ОПЛАТУ (ЮKassa / Яндекс Пэй)
+        alert(`Спасибо, ${name}! Заказ на сумму ${total.toLocaleString('ru-RU')} ₽ сформирован. Перенаправляем на страницу оплаты...`);
+        cart = [];
+        toggleCart();
+    }
+
+    renderProducts();
+</script>
+
+</body>
+</html>
