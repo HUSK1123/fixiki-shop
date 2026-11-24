@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Фиксики — Запчасти и комплектующие для БПЛА</title>
+<title>Фиксики — Запчасти и ремонт БПЛА</title>
 <style>
 :root{--primary:#fc3f1d;--primary-hover:#e03516;--bg:#f4f5f7;--card-bg:#fff;--text:#1f2328}
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;margin:0;padding:20px;background:var(--bg);color:var(--text)}
@@ -29,9 +29,16 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-s
 .card h3{margin:14px 0 8px;font-size:18px}
 .card p{color:#555;font-size:14px;line-height:1.4;flex-grow:1;margin:0 0 12px}
 .price{font-size:20px;font-weight:700;margin-bottom:12px}
-.btn{background:var(--primary);color:#fff;border:none;padding:12px 16px;border-radius:10px;cursor:pointer;font-size:15px;font-weight:600}
+.btn{background:var(--primary);color:#fff;border:none;padding:12px 16px;border-radius:10px;cursor:pointer;font-size:15px;font-weight:600;text-decoration:none;display:inline-block;text-align:center}
 .btn:hover{background:var(--primary-hover)}
 .btn-secondary{background:#e5e7eb;color:#1f2328;margin-top:8px}
+.repair-box{display:none;background:var(--card-bg);border-radius:14px;padding:28px;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.repair-box h2{margin-top:0;font-size:22px}
+.repair-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin:20px 0}
+.repair-item{background:#f9fafb;border:1px solid #e5e7eb;border-radius:12px;padding:16px}
+.repair-item h4{margin:0 0 8px;font-size:16px}
+.repair-item p{margin:0;font-size:14px;color:#555;line-height:1.4}
+.price-notice{background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;padding:14px 18px;border-radius:10px;margin:20px 0;font-size:14px}
 .footer{text-align:center;margin-top:40px;padding:20px;color:#666;font-size:14px}
 .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.55);justify-content:center;align-items:center;z-index:1000}
 .modal-content{background:#fff;padding:25px;border-radius:16px;width:90%;max-width:460px;max-height:85vh;overflow-y:auto}
@@ -47,7 +54,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-s
 <div class="header">
 <div class="brand">
 <img src="logo.jpg" alt="Логотип Фиксики" class="brand-logo">
-<div class="brand-text"><h1>Фиксики</h1><span>Магазин запчастей и комплектующих для БПЛА</span></div>
+<div class="brand-text"><h1>Фиксики</h1><span>Магазин запчастей, комплектующих и ремонт БПЛА</span></div>
 </div>
 <div class="header-actions">
 <a href="tel:+79384472949" class="phone-link">+7 938 447-29-49</a>
@@ -58,9 +65,21 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-s
 <button class="filter-btn active" onclick="setFilter('all', this)">Все товары</button>
 <button class="filter-btn" onclick="setFilter('new', this)">Новое</button>
 <button class="filter-btn" onclick="setFilter('used', this)">Б/У</button>
+<button class="filter-btn" onclick="showRepair(this)">Ремонт БПЛА</button>
 </div>
 <div class="products" id="product-list"></div>
-<div class="footer">Магазин запчастей и комплектующих для БПЛА «Фиксики» • Телефон: <a href="tel:+79384472949" class="phone-link">+7 938 447-29-49</a></div>
+<div class="repair-box" id="repair-section">
+<h2>Сервисный центр и ремонт БПЛА «Фиксики»</h2>
+<p style="color:#555;line-height:1.5">Выполняем диагностику, компонентный ремонт и восстановление промышленных и гражданских БПЛА DJI (Mavic 3 / 3 Classic / 3 Pro / 3T / 3E, Matrice 4T / 4E и др.) с использованием оригинальных запчастей из нашего каталога.</p>
+<div class="repair-grid">
+<div class="repair-item"><h4>Ремонт подвеса и камер</h4><p>Замена Pitch, Yaw и Roll моторов, коаксиальных шлейфов, калибровка подвеса и восстановление после падений.</p></div>
+<div class="repair-item"><h4>Замена корпусов и лучей</h4><p>Переборка на новую среднюю раму, замена лучей, демпферов и элементов корпуса без следов вскрытия.</p></div>
+<div class="repair-item"><h4>Электроника и платы ESC</h4><p>Диагностика силовых цепей, замена плат регуляторов оборотов (ESC), полетных контроллеров и модулей связи.</p></div>
+</div>
+<div class="price-notice">Прайс-лист с точными ценами на услуги скоро появится на этой странице. Пока узнать стоимость ремонта можно по телефону или в MAX.</div>
+<a href="tel:+79384472949" class="btn">Позвонить мастеру: +7 938 447-29-49</a>
+</div>
+<div class="footer">Магазин запчастей и ремонт БПЛА «Фиксики» • Телефон: <a href="tel:+79384472949" class="phone-link">+7 938 447-29-49</a></div>
 </div>
 <div class="modal" id="cart-modal">
 <div class="modal-content">
@@ -71,7 +90,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-s
 <div class="input-group"><input type="tel" id="customer-phone" placeholder="Ваш телефон или MAX для связи"></div>
 <button class="btn" style="width:100%" onclick="checkout()">Оплатить заказ</button>
 <button class="btn btn-secondary" style="width:100%" onclick="toggleCart()">Продолжить покупки</button>
-<div class="support-note">Вопросы по подбору запчастей: <a href="tel:+79384472949">+7 938 447-29-49</a></div>
+<div class="support-note">Вопросы по подбору запчастей и ремонту: <a href="tel:+79384472949">+7 938 447-29-49</a></div>
 </div>
 </div>
 <script>
@@ -92,7 +111,20 @@ const products = [
 {id:14,condition:"new",name:"Шлейф (косичка) для Mavic 3T",desc:"Новый оригинальный коаксиальный шлейф блока камер и тепловизора для DJI Mavic 3 Thermal.",price:2300,img:"066c5ae4-adb1-4814-b24d-2fb52d37cf15.jpg"}
 ];
 let cart=[],currentFilter='all';
-function setFilter(f,btn){currentFilter=f;document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderProducts()}
+function setFilter(f,btn){
+currentFilter=f;
+document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+btn.classList.add('active');
+document.getElementById('repair-section').style.display='none';
+document.getElementById('product-list').style.display='grid';
+renderProducts();
+}
+function showRepair(btn){
+document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+btn.classList.add('active');
+document.getElementById('product-list').style.display='none';
+document.getElementById('repair-section').style.display='block';
+}
 function renderProducts(){
 const list=document.getElementById('product-list');list.innerHTML='';
 const filtered=currentFilter==='all'?products:products.filter(p=>p.condition===currentFilter);
