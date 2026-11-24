@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Название во вкладке браузера (можно менять в любой момент) -->
-    <title>Фиксики — Запчасти для дронов</title>
+    <title>Фиксики — Запчасти и комплектующие для БПЛА</title>
     <style>
         :root {
             --primary: #fc3f1d;
@@ -15,9 +14,11 @@
         }
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; margin: 0; padding: 20px; background: var(--bg); color: var(--text); }
         .container { max-width: 1100px; margin: 0 auto; }
-        .header { display: flex; flex-wrap: wrap; gap: 15px; justify-content: space-between; align-items: center; background: var(--card-bg); padding: 18px 25px; border-radius: 14px; margin-bottom: 24px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-        .brand h1 { margin: 0; font-size: 24px; }
-        .brand span { font-size: 13px; color: #666; }
+        .header { display: flex; flex-wrap: wrap; gap: 15px; justify-content: space-between; align-items: center; background: var(--card-bg); padding: 16px 25px; border-radius: 14px; margin-bottom: 24px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .brand { display: flex; align-items: center; gap: 15px; }
+        .brand-logo { width: 64px; height: 64px; object-fit: contain; border-radius: 10px; background: #000; }
+        .brand-text h1 { margin: 0; font-size: 24px; }
+        .brand-text span { font-size: 13px; color: #666; }
         .header-actions { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
         .phone-link { text-decoration: none; color: var(--text); font-weight: 600; font-size: 16px; transition: color 0.15s; }
         .phone-link:hover { color: var(--primary); }
@@ -49,9 +50,11 @@
 <div class="container">
     <div class="header">
         <div class="brand">
-            <!-- Название магазина в шапке (меняется здесь) -->
-            <h1>Фиксики</h1>
-            <span>Магазин запчастей и комплектующих для дронов</span>
+            <img src="logo.png" alt="Логотип Фиксики" class="brand-logo">
+            <div class="brand-text">
+                <h1>Фиксики</h1>
+                <span>Магазин запчастей и комплектующих для БПЛА</span>
+            </div>
         </div>
         <div class="header-actions">
             <a href="tel:+79384472949" class="phone-link">+7 938 447-29-49</a>
@@ -62,7 +65,7 @@
     <div class="products" id="product-list"></div>
 
     <div class="footer">
-        Магазин запчастей для дронов «Фиксики» • Телефон для связи: <a href="tel:+79384472949" class="phone-link">+7 938 447-29-49</a>
+        Магазин запчастей и комплектующих для БПЛА «Фиксики» • Телефон для связи: <a href="tel:+79384472949" class="phone-link">+7 938 447-29-49</a>
     </div>
 </div>
 
@@ -77,7 +80,7 @@
             <input type="text" id="customer-name" placeholder="Ваше имя">
         </div>
         <div class="input-group">
-            <input type="tel" id="customer-phone" placeholder="Ваш телефон или Telegram для связи">
+            <input type="tel" id="customer-phone" placeholder="Ваш телефон или MAX для связи">
         </div>
 
         <button class="btn" style="width: 100%;" onclick="checkout()">Оплатить заказ</button>
@@ -95,7 +98,7 @@
         {
             id: 1,
             name: "Бесколлекторный мотор 2207 1950KV",
-            desc: "Надёжный мотор для 5-дюймовых FPV-дронов, вал из титанового сплава, высокая тяга.",
+            desc: "Надёжный мотор для 5-дюймовых FPV-БПЛА, вал из титанового сплава, высокая тяга.",
             price: 1850,
             img: "https://placeholder.com"
         },
@@ -181,7 +184,6 @@
 
         const total = cart.reduce((sum, item) => sum + item.price, 0);
         
-        // СЮДА ПОДКЛЮЧАЕТСЯ РЕАЛЬНАЯ ССЫЛКА НА ОПЛАТУ (ЮKassa / Яндекс Пэй)
         alert(`Спасибо, ${name}! Заказ на сумму ${total.toLocaleString('ru-RU')} ₽ сформирован. Перенаправляем на страницу оплаты...`);
         cart = [];
         toggleCart();
