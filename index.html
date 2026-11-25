@@ -29,7 +29,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-s
 .filter-btn{background:var(--filter-bg);color:var(--filter-text);border:1px solid var(--filter-border);padding:10px 18px;border-radius:10px;cursor:pointer;font-size:14px;font-weight:600}
 .filter-btn:hover{border-color:var(--primary)}
 .filter-btn.active{background:var(--primary);color:#fff;border-color:var(--primary);box-shadow:0 4px 14px rgba(255,77,28,.35)}
-.products{display:none;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
+.products{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
 .card{position:relative;background:var(--card-bg);border-radius:14px;padding:14px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 6px 18px rgba(0,0,0,.12)}
 .card.out-of-stock{opacity:.78}
 .badge{position:absolute;top:20px;left:20px;padding:3px 8px;border-radius:6px;font-size:11px;font-weight:700;text-transform:uppercase}
@@ -77,11 +77,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-s
 <div class="container">
 <div class="header">
 <div class="brand"><img src="logo.jpg" alt="Логотип Фиксики" class="brand-logo"><div class="brand-text"><h1 onclick="secretTap()">Фиксики</h1><span>Ремонт БПЛА, запчасти и комплектующие</span></div></div>
-<div class="header-center"><input type="text" id="search-input" class="search-input" placeholder="Поиск запчастей (например: Mavic 3 Pro, шлейф, мотор)..." oninput="handleSearch()"><div class="header-badges"><span>📍 ДНР, г. Енакиево</span><span>✓ Сервисный ремонт БПЛА</span><span>✓ Оригинальные запчасти DJI</span></div></div>
+<div class="header-center"><input type="text" id="search-input" class="search-input" placeholder="Поиск по каталогу (например: Mavic 3 Pro, шлейф, мотор)..." oninput="handleSearch()"><div class="header-badges"><span>📍 ДНР, г. Енакиево</span><span>✓ Сервисный ремонт БПЛА</span><span>✓ Оригинальные запчасти DJI</span></div></div>
 <div class="header-actions"><a href="tel:+79384472949" class="phone-link">+7 938 447-29-49</a><button class="theme-btn" id="theme-toggle" onclick="toggleTheme()">☀️ Светлая</button><button class="btn" onclick="toggleCart()">Корзина (<span id="cart-count">0</span>)</button></div>
 </div>
-<div class="filters"><button class="filter-btn active" id="repair-tab-btn" onclick="showRepair(this)">Ремонт БПЛА</button><button class="filter-btn" id="all-tab-btn" onclick="setFilter('all',this)">Все запчасти</button><button class="filter-btn" onclick="setFilter('new',this)">Новое</button><button class="filter-btn" onclick="setFilter('used',this)">Б/У</button><button class="filter-btn" id="admin-tab-btn" style="display:none;background:#111827;color:#fbbf24" onclick="showAdmin(this)">⚙ Кабинет создателя (<span id="orders-badge">0</span>)</button></div>
-<div class="repair-box" id="repair-section" style="display:block">
+<div class="filters"><button class="filter-btn active" id="all-tab-btn" onclick="setFilter('all',this)">Все товары</button><button class="filter-btn" onclick="setFilter('new',this)">Новое</button><button class="filter-btn" onclick="setFilter('used',this)">Б/У</button><button class="filter-btn" id="repair-tab-btn" onclick="showRepair(this)">Ремонт БПЛА</button><button class="filter-btn" id="admin-tab-btn" style="display:none;background:#111827;color:#fbbf24" onclick="showAdmin(this)">⚙ Кабинет создателя (<span id="orders-badge">0</span>)</button></div>
+<div class="products" id="product-list"></div>
+<div class="repair-box" id="repair-section">
 <h2>Прайс-лист на ремонт БПЛА</h2>
 <div class="address-tag">📍 Адрес мастерской: ДНР, г. Енакиево</div>
 <div class="price-notice">Внимание! Цена указана только за работу. Запчасти приобретаются отдельно. Вы также можете привезти свои запчасти или донора.</div>
@@ -94,12 +95,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-s
 <tr><td>Замена ESC платы или GPS модуля и шлейфов на них</td><td class="cost">1 000 ₽</td></tr>
 <tr><td>Замена датчиков или шлейфов на датчики</td><td class="cost">1 000 ₽</td></tr>
 </table>
-<div style="display:flex;gap:12px;flex-wrap:wrap">
 <a href="tel:+79384472949" class="btn">Записаться на ремонт: +7 938 447-29-49</a>
-<button class="btn btn-secondary" style="margin:0" onclick="setFilter('all',document.getElementById('all-tab-btn'))">Перейти в каталог запчастей →</button>
 </div>
-</div>
-<div class="products" id="product-list"></div>
 <div class="admin-box" id="admin-section">
 <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
 <h2>Кабинет создателя «Фиксики»</h2>
