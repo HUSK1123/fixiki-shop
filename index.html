@@ -5,48 +5,66 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Фиксики — Запчасти и ремонт БПЛА</title>
 <style>
-:root{--primary:#fc3f1d;--primary-hover:#e03516;--bg:#f4f5f7;--card-bg:#fff;--text:#1f2328}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;margin:0;padding:20px;background:var(--bg);color:var(--text)}
-.container{max-width:1100px;margin:0 auto}
-.header{display:flex;flex-wrap:wrap;gap:15px;justify-content:space-between;align-items:center;background:var(--card-bg);padding:16px 25px;border-radius:14px;margin-bottom:20px;box-shadow:0 2px 10px rgba(0,0,0,.05)}
-.brand{display:flex;align-items:center;gap:15px}
-.brand-logo{width:64px;height:64px;object-fit:contain;border-radius:10px;background:#000}
+:root{--primary:#fc3f1d;--primary-hover:#e03516;--bg:#e9ecf0;--card-bg:#fff;--text:#1f2328}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;margin:0;padding:16px;background:var(--bg);background-image:radial-gradient(#cbd5e1 1px,transparent 1px);background-size:20px 20px;color:var(--text)}
+.container{max-width:1460px;margin:0 auto}
+.header{display:flex;flex-wrap:wrap;gap:15px;justify-content:space-between;align-items:center;background:var(--card-bg);padding:16px 24px;border-radius:14px;margin-bottom:18px;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+.brand{display:flex;align-items:center;gap:14px}
+.brand-logo{width:60px;height:60px;object-fit:contain;border-radius:10px;background:#000}
 .brand-text h1{margin:0;font-size:24px}
 .brand-text span{font-size:13px;color:#666}
-.header-actions{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.header-actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
 .phone-link{text-decoration:none;color:var(--text);font-weight:600;font-size:16px}
 .phone-link:hover{color:var(--primary)}
-.filters{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap}
-.filter-btn{background:#fff;color:var(--text);border:1px solid #d1d5db;padding:10px 20px;border-radius:10px;cursor:pointer;font-size:15px;font-weight:600}
+.filters{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap}
+.filter-btn{background:#fff;color:var(--text);border:1px solid #d1d5db;padding:10px 18px;border-radius:10px;cursor:pointer;font-size:14px;font-weight:600}
 .filter-btn.active,.filter-btn:hover{border-color:var(--primary)}
 .filter-btn.active{background:var(--primary);color:#fff}
-.products{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
-.card{position:relative;background:var(--card-bg);border-radius:14px;padding:16px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 2px 10px rgba(0,0,0,.05)}
-.badge{position:absolute;top:26px;left:26px;padding:4px 10px;border-radius:6px;font-size:12px;font-weight:700;text-transform:uppercase}
+.products{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
+.card{position:relative;background:var(--card-bg);border-radius:14px;padding:14px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+.badge{position:absolute;top:20px;left:20px;padding:3px 8px;border-radius:6px;font-size:11px;font-weight:700;text-transform:uppercase}
 .badge-new{background:#dcfce7;color:#166534}
 .badge-used{background:#fef3c7;color:#92400e}
-.card img{width:100%;height:220px;object-fit:contain;border-radius:10px;background:#fff;border:1px solid #f0f0f0}
-.card h3{margin:14px 0 8px;font-size:18px}
-.card p{color:#555;font-size:14px;line-height:1.4;flex-grow:1;margin:0 0 12px}
-.price{font-size:20px;font-weight:700;margin-bottom:12px}
-.btn{background:var(--primary);color:#fff;border:none;padding:12px 16px;border-radius:10px;cursor:pointer;font-size:15px;font-weight:600;text-decoration:none;display:inline-block;text-align:center}
+.card img{width:100%;height:190px;object-fit:contain;border-radius:10px;background:#fff;border:1px solid #f0f0f0}
+.card h3{margin:12px 0 6px;font-size:16px;line-height:1.3}
+.card p{color:#555;font-size:13px;line-height:1.4;flex-grow:1;margin:0 0 10px}
+.price{font-size:18px;font-weight:700;margin-bottom:10px}
+.btn{background:var(--primary);color:#fff;border:none;padding:11px 14px;border-radius:10px;cursor:pointer;font-size:14px;font-weight:600;text-decoration:none;display:inline-block;text-align:center}
 .btn:hover{background:var(--primary-hover)}
 .btn-secondary{background:#e5e7eb;color:#1f2328;margin-top:8px}
-.repair-box{display:none;background:var(--card-bg);border-radius:14px;padding:28px;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.repair-box{display:none;background:var(--card-bg);border-radius:14px;padding:24px;box-shadow:0 2px 10px rgba(0,0,0,.06)}
 .repair-box h2{margin-top:0;font-size:22px}
-.repair-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin:20px 0}
-.repair-item{background:#f9fafb;border:1px solid #e5e7eb;border-radius:12px;padding:16px}
-.repair-item h4{margin:0 0 8px;font-size:16px}
-.repair-item p{margin:0;font-size:14px;color:#555;line-height:1.4}
-.price-notice{background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;padding:14px 18px;border-radius:10px;margin:20px 0;font-size:14px}
-.footer{text-align:center;margin-top:40px;padding:20px;color:#666;font-size:14px}
+.price-notice{background:#fff7ed;border-left:4px solid #fc3f1d;color:#7c2d12;padding:14px 16px;border-radius:8px;margin:16px 0;font-size:14px;line-height:1.5;font-weight:500}
+.price-table{width:100%;border-collapse:collapse;margin:18px 0}
+.price-table tr{border-bottom:1px solid #e5e7eb}
+.price-table tr:nth-child(even){background:#f9fafb}
+.price-table td{padding:14px 12px;font-size:15px}
+.price-table td.cost{font-weight:700;text-align:right;white-space:nowrap;color:var(--primary);font-size:16px}
+.footer{text-align:center;margin-top:36px;padding:18px;color:#555;font-size:14px;background:rgba(255,255,255,.7);border-radius:12px}
 .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.55);justify-content:center;align-items:center;z-index:1000}
-.modal-content{background:#fff;padding:25px;border-radius:16px;width:90%;max-width:460px;max-height:85vh;overflow-y:auto}
+.modal-content{background:#fff;padding:22px;border-radius:16px;width:90%;max-width:460px;max-height:85vh;overflow-y:auto}
 .cart-item{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;border-bottom:1px solid #eee;padding-bottom:10px;font-size:14px}
 .remove-btn{background:none;border:none;color:#d93025;cursor:pointer;font-size:16px;margin-left:8px}
 .input-group{margin:12px 0}
 .input-group input{width:100%;padding:10px;border:1px solid #ccc;border-radius:8px;box-sizing:border-box;font-size:14px}
 .support-note{font-size:13px;color:#666;margin-top:12px;text-align:center}
+@media(max-width:600px){
+body{padding:10px}
+.header{padding:12px 14px;margin-bottom:12px}
+.brand-logo{width:48px;height:48px}
+.brand-text h1{font-size:20px}
+.products{grid-template-columns:repeat(2,1fr);gap:10px}
+.card{padding:10px;border-radius:12px}
+.badge{top:14px;left:14px;font-size:10px;padding:2px 6px}
+.card img{height:125px}
+.card h3{font-size:13px;margin:8px 0 4px}
+.card p{font-size:11px;margin-bottom:8px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.price{font-size:15px;margin-bottom:8px}
+.btn{padding:9px 8px;font-size:12px}
+.repair-box{padding:16px}
+.price-table td{padding:10px 6px;font-size:13px}
+.price-table td.cost{font-size:14px}
+}
 </style>
 </head>
 <body>
@@ -69,15 +87,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-s
 </div>
 <div class="products" id="product-list"></div>
 <div class="repair-box" id="repair-section">
-<h2>Сервисный центр и ремонт БПЛА «Фиксики»</h2>
-<p style="color:#555;line-height:1.5">Выполняем диагностику, компонентный ремонт и восстановление промышленных и гражданских БПЛА DJI (Mavic 3 / 3 Classic / 3 Pro / 3T / 3E, Matrice 4T / 4E и др.) с использованием оригинальных запчастей из нашего каталога.</p>
-<div class="repair-grid">
-<div class="repair-item"><h4>Ремонт подвеса и камер</h4><p>Замена Pitch, Yaw и Roll моторов, коаксиальных шлейфов, калибровка подвеса и восстановление после падений.</p></div>
-<div class="repair-item"><h4>Замена корпусов и лучей</h4><p>Переборка на новую среднюю раму, замена лучей, демпферов и элементов корпуса без следов вскрытия.</p></div>
-<div class="repair-item"><h4>Электроника и платы ESC</h4><p>Диагностика силовых цепей, замена плат регуляторов оборотов (ESC), полетных контроллеров и модулей связи.</p></div>
-</div>
-<div class="price-notice">Прайс-лист с точными ценами на услуги скоро появится на этой странице. Пока узнать стоимость ремонта можно по телефону или в MAX.</div>
-<a href="tel:+79384472949" class="btn">Позвонить мастеру: +7 938 447-29-49</a>
+<h2>Прайс-лист на ремонт БПЛА</h2>
+<div class="price-notice">Внимание! Цена указана только за работу. Запчасти приобретаются отдельно. Вы также можете привезти свои запчасти или донора.</div>
+<table class="price-table">
+<tr><td>Замена шлейфа камеры и/или демпфера</td><td class="cost">1 500 ₽</td></tr>
+<tr><td>Замена шлейфа камеры и двигателя / двигателей камеры</td><td class="cost">2 500 ₽</td></tr>
+<tr><td>Замена 1–2-х лучей или двигателей луча</td><td class="cost">2 500 ₽</td></tr>
+<tr><td>Замена 3–4-х лучей или двигателей</td><td class="cost">3 000 ₽</td></tr>
+<tr><td>Полный перенос запчастей в новый корпус и настройка дрона</td><td class="cost">4 000 ₽</td></tr>
+<tr><td>Замена ESC платы или GPS модуля и шлейфов на них</td><td class="cost">1 000 ₽</td></tr>
+<tr><td>Замена датчиков или шлейфов на датчики</td><td class="cost">1 000 ₽</td></tr>
+</table>
+<a href="tel:+79384472949" class="btn">Записаться на ремонт: +7 938 447-29-49</a>
 </div>
 <div class="footer">Магазин запчастей и ремонт БПЛА «Фиксики» • Телефон: <a href="tel:+79384472949" class="phone-link">+7 938 447-29-49</a></div>
 </div>
