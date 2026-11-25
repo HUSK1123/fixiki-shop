@@ -5,29 +5,32 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Фиксики — Запчасти и ремонт БПЛА</title>
 <style>
-:root{--primary:#ff4d1c;--primary-hover:#e0380b;--bg:#12151c;--card-bg:#ffffff;--text:#181b20}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;margin:0;padding:16px;background:radial-gradient(circle at top right,#261b18 0%,#12151c 45%,#0d0f14 100%);min-height:100vh;color:var(--text)}
+:root{--primary:#ff4d1c;--primary-hover:#e0380b;--bg:radial-gradient(circle at top right,#261b18 0%,#12151c 45%,#0d0f14 100%);--header-bg:linear-gradient(135deg,#1d222d 0%,#161a22 100%);--header-border:rgba(255,255,255,.08);--header-text:#fff;--subtext:#9ca3af;--search-bg:rgba(255,255,255,.07);--search-border:rgba(255,255,255,.15);--badge-bg:rgba(255,255,255,.06);--badge-text:#cbd5e1;--filter-bg:rgba(255,255,255,.08);--filter-text:#e5e7eb;--filter-border:rgba(255,255,255,.12);--card-bg:#fff;--text:#181b20;--footer-bg:rgba(255,255,255,.05);--footer-text:#9ca3af}
+body.light{--bg:radial-gradient(circle at top right,#fff1ed 0%,#eef1f5 50%,#e2e6ec 100%);--header-bg:#ffffff;--header-border:#e5e7eb;--header-text:#181b20;--subtext:#6b7280;--search-bg:#f3f4f6;--search-border:#d1d5db;--badge-bg:#f3f4f6;--badge-text:#4b5563;--filter-bg:#ffffff;--filter-text:#1f2328;--filter-border:#d1d5db;--footer-bg:#ffffff;--footer-text:#6b7280}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;margin:0;padding:16px;background:var(--bg);min-height:100vh;color:var(--text);transition:background .2s}
 .container{max-width:1460px;margin:0 auto}
-.header{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center;background:linear-gradient(135deg,#1d222d 0%,#161a22 100%);border:1px solid rgba(255,255,255,.08);color:#fff;padding:16px 24px;border-radius:16px;margin-bottom:18px;box-shadow:0 8px 24px rgba(0,0,0,.3)}
+.header{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center;background:var(--header-bg);border:1px solid var(--header-border);color:var(--header-text);padding:16px 24px;border-radius:16px;margin-bottom:18px;box-shadow:0 8px 24px rgba(0,0,0,.15)}
 .brand{display:flex;align-items:center;gap:14px}
 .brand-logo{width:62px;height:62px;object-fit:contain;border-radius:12px;background:#000;border:1px solid rgba(255,77,28,.4)}
 .brand-text h1{margin:0;font-size:24px;letter-spacing:.3px}
-.brand-text span{font-size:13px;color:#9ca3af}
+.brand-text span{font-size:13px;color:var(--subtext)}
 .header-center{flex:1;min-width:240px;max-width:520px;display:flex;flex-direction:column;gap:8px}
-.search-input{width:100%;padding:11px 16px;border-radius:10px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.07);color:#fff;font-size:14px;box-sizing:border-box;outline:none;transition:border-color .15s}
-.search-input::placeholder{color:#9ca3af}
-.search-input:focus{border-color:var(--primary);background:rgba(255,255,255,.11)}
-.header-badges{display:flex;gap:12px;font-size:12px;color:#cbd5e1;flex-wrap:wrap}
-.header-badges span{background:rgba(255,255,255,.06);padding:3px 9px;border-radius:6px}
-.header-actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
-.phone-link{text-decoration:none;color:#fff;font-weight:600;font-size:16px;transition:color .15s}
+.search-input{width:100%;padding:11px 16px;border-radius:10px;border:1px solid var(--search-border);background:var(--search-bg);color:var(--header-text);font-size:14px;box-sizing:border-box;outline:none;transition:border-color .15s}
+.search-input::placeholder{color:var(--subtext)}
+.search-input:focus{border-color:var(--primary)}
+.header-badges{display:flex;gap:10px;font-size:12px;color:var(--badge-text);flex-wrap:wrap}
+.header-badges span{background:var(--badge-bg);padding:3px 9px;border-radius:6px}
+.header-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.phone-link{text-decoration:none;color:var(--header-text);font-weight:600;font-size:15px;transition:color .15s}
 .phone-link:hover{color:var(--primary)}
+.theme-btn{background:var(--search-bg);color:var(--header-text);border:1px solid var(--search-border);padding:9px 13px;border-radius:10px;cursor:pointer;font-size:13px;font-weight:600;transition:all .15s}
+.theme-btn:hover{border-color:var(--primary)}
 .filters{display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap}
-.filter-btn{background:rgba(255,255,255,.08);color:#e5e7eb;border:1px solid rgba(255,255,255,.12);padding:10px 18px;border-radius:10px;cursor:pointer;font-size:14px;font-weight:600;transition:all .15s}
-.filter-btn:hover{border-color:var(--primary);color:#fff}
+.filter-btn{background:var(--filter-bg);color:var(--filter-text);border:1px solid var(--filter-border);padding:10px 18px;border-radius:10px;cursor:pointer;font-size:14px;font-weight:600;transition:all .15s}
+.filter-btn:hover{border-color:var(--primary)}
 .filter-btn.active{background:var(--primary);color:#fff;border-color:var(--primary);box-shadow:0 4px 14px rgba(255,77,28,.35)}
 .products{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
-.card{position:relative;background:var(--card-bg);border-radius:14px;padding:14px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 6px 18px rgba(0,0,0,.22);transition:transform .15s}
+.card{position:relative;background:var(--card-bg);border-radius:14px;padding:14px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 6px 18px rgba(0,0,0,.12);transition:transform .15s}
 .card:hover{transform:translateY(-3px)}
 .badge{position:absolute;top:20px;left:20px;padding:3px 8px;border-radius:6px;font-size:11px;font-weight:700;text-transform:uppercase}
 .badge-new{background:#dcfce7;color:#166534}
@@ -40,7 +43,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-s
 .btn:hover{background:var(--primary-hover)}
 .btn:active{transform:scale(.97)}
 .btn-secondary{background:#e5e7eb;color:#1f2328;margin-top:8px}
-.repair-box{display:none;background:var(--card-bg);border-radius:14px;padding:24px;box-shadow:0 6px 18px rgba(0,0,0,.22)}
+.repair-box{display:none;background:var(--card-bg);border-radius:14px;padding:24px;box-shadow:0 6px 18px rgba(0,0,0,.12)}
 .repair-box h2{margin-top:0;font-size:22px}
 .price-notice{background:#fff7ed;border-left:4px solid var(--primary);color:#7c2d12;padding:14px 16px;border-radius:8px;margin:16px 0;font-size:14px;line-height:1.5;font-weight:500}
 .price-table{width:100%;border-collapse:collapse;margin:18px 0}
@@ -48,8 +51,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-s
 .price-table tr:nth-child(even){background:#f9fafb}
 .price-table td{padding:14px 12px;font-size:15px}
 .price-table td.cost{font-weight:700;text-align:right;white-space:nowrap;color:var(--primary);font-size:16px}
-.footer{text-align:center;margin-top:36px;padding:18px;color:#9ca3af;font-size:14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:12px}
-.footer a{color:#fff}
+.footer{text-align:center;margin-top:36px;padding:18px;color:var(--footer-text);font-size:14px;background:var(--footer-bg);border:1px solid var(--header-border);border-radius:12px}
+.footer a{color:var(--header-text)}
 .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);justify-content:center;align-items:center;z-index:1000}
 .modal-content{background:#fff;padding:22px;border-radius:16px;width:90%;max-width:460px;max-height:85vh;overflow-y:auto}
 .cart-item{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;border-bottom:1px solid #eee;padding-bottom:10px;font-size:14px}
@@ -97,14 +100,15 @@ body{padding:10px}
 </div>
 <div class="header-actions">
 <a href="tel:+79384472949" class="phone-link">+7 938 447-29-49</a>
-<button class="btn" onclick="playClick(620);toggleCart()">Корзина (<span id="cart-count">0</span>)</button>
+<button class="theme-btn" id="theme-toggle" onclick="toggleTheme()">☀️ Светлая</button>
+<button class="btn" onclick="toggleCart()">Корзина (<span id="cart-count">0</span>)</button>
 </div>
 </div>
 <div class="filters">
-<button class="filter-btn active" onclick="playClick(520);setFilter('all', this)">Все товары</button>
-<button class="filter-btn" onclick="playClick(520);setFilter('new', this)">Новое</button>
-<button class="filter-btn" onclick="playClick(520);setFilter('used', this)">Б/У</button>
-<button class="filter-btn" onclick="playClick(520);showRepair(this)">Ремонт БПЛА</button>
+<button class="filter-btn active" onclick="setFilter('all', this)">Все товары</button>
+<button class="filter-btn" onclick="setFilter('new', this)">Новое</button>
+<button class="filter-btn" onclick="setFilter('used', this)">Б/У</button>
+<button class="filter-btn" onclick="showRepair(this)">Ремонт БПЛА</button>
 </div>
 <div class="products" id="product-list"></div>
 <div class="repair-box" id="repair-section">
@@ -119,7 +123,7 @@ body{padding:10px}
 <tr><td>Замена ESC платы или GPS модуля и шлейфов на них</td><td class="cost">1 000 ₽</td></tr>
 <tr><td>Замена датчиков или шлейфов на датчики</td><td class="cost">1 000 ₽</td></tr>
 </table>
-<a href="tel:+79384472949" class="btn" onclick="playClick(680)">Записаться на ремонт: +7 938 447-29-49</a>
+<a href="tel:+79384472949" class="btn">Записаться на ремонт: +7 938 447-29-49</a>
 </div>
 <div class="footer">Магазин запчастей и ремонт БПЛА «Фиксики» • Телефон: <a href="tel:+79384472949" class="phone-link">+7 938 447-29-49</a></div>
 </div>
@@ -129,26 +133,76 @@ body{padding:10px}
 <div id="cart-items"></div>
 <h4>Итого к оплате: <span id="cart-total">0</span> ₽</h4>
 <div class="input-group"><input type="text" id="customer-name" placeholder="Ваше имя"></div>
-<div class="input-group"><input type="tel" id="customer-phone" placeholder="Ваш телефон или MAX для связи"></div>
-<button class="btn" style="width:100%" onclick="playClick(740);checkout()">Оплатить заказ</button>
-<button class="btn btn-secondary" style="width:100%" onclick="playClick(420);toggleCart()">Продолжить покупки</button>
-<div class="support-note">Вопросы по подбору запчастей и ремонту: <a href="tel:+79384472949">+7 938 447-29-49</a></div>
-</div>
-</div>
 <script>
+function toggleTheme(){
+const isLight=document.body.classList.toggle('light');
+document.getElementById('theme-toggle').textContent=isLight?'🌙 Тёмная':'☀️ Светлая';
+localStorage.setItem('fixiki_theme',isLight?'light':'dark');
+}
+if(localStorage.getItem('fixiki_theme')==='light'){
+document.body.classList.add('light');
+document.getElementById('theme-toggle').textContent='🌙 Тёмная';
+}
 let audioCtx=null;
-function playClick(freq){
+function playSound(type){
 try{
 if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();
-const osc=audioCtx.createOscillator(),gain=audioCtx.createGain();
-osc.type='sine';osc.frequency.setValueAtTime(freq||580,audioCtx.currentTime);
-osc.frequency.exponentialRampToValueAtTime(180,audioCtx.currentTime+0.045);
-gain.gain.setValueAtTime(0.08,audioCtx.currentTime);
-gain.gain.exponentialRampToValueAtTime(0.001,audioCtx.currentTime+0.045);
-osc.connect(gain);gain.connect(audioCtx.destination);
-osc.start();osc.stop(audioCtx.currentTime+0.045);
+if(audioCtx.state==='suspended')audioCtx.resume();
+const now=audioCtx.currentTime;
+if(type==='switch'){
+const freqs=[480,720];
+freqs.forEach((f,i)=>{
+const o=audioCtx.createOscillator(),g=audioCtx.createGain();
+o.type='triangle';o.frequency.setValueAtTime(f,now+i*0.025);
+g.gain.setValueAtTime(0.07,now+i*0.025);
+g.gain.exponentialRampToValueAtTime(0.001,now+i*0.025+0.022);
+o.connect(g);g.connect(audioCtx.destination);
+o.start(now+i*0.025);o.stop(now+i*0.025+0.025);
+});
+}else if(type==='add'){
+const o=audioCtx.createOscillator(),g=audioCtx.createGain();
+o.type='sawtooth';o.frequency.setValueAtTime(240,now);
+o.frequency.exponentialRampToValueAtTime(920,now+0.14);
+g.gain.setValueAtTime(0.05,now);
+g.gain.exponentialRampToValueAtTime(0.001,now+0.15);
+o.connect(g);g.connect(audioCtx.destination);
+o.start(now);o.stop(now+0.16);
+const o2=audioCtx.createOscillator(),g2=audioCtx.createGain();
+o2.type='sine';o2.frequency.setValueAtTime(1180,now+0.09);
+g2.gain.setValueAtTime(0.08,now+0.09);
+g2.gain.exponentialRampToValueAtTime(0.001,now+0.22);
+o2.connect(g2);g2.connect(audioCtx.destination);
+o2.start(now+0.09);o2.stop(now+0.23);
+}else if(type==='remove'){
+const o=audioCtx.createOscillator(),g=audioCtx.createGain();
+o.type='sine';o.frequency.setValueAtTime(420,now);
+o.frequency.exponentialRampToValueAtTime(140,now+0.09);
+g.gain.setValueAtTime(0.08,now);
+g.gain.exponentialRampToValueAtTime(0.001,now+0.095);
+o.connect(g);g.connect(audioCtx.destination);
+o.start(now);o.stop(now+0.1);
+}else{
+const notes=[523.25,659.25,783.99];
+notes.forEach((f,i)=>{
+const o=audioCtx.createOscillator(),g=audioCtx.createGain();
+o.type='sine';o.frequency.setValueAtTime(f,now+i*0.045);
+g.gain.setValueAtTime(0.06,now+i*0.045);
+g.gain.exponentialRampToValueAtTime(0.001,now+i*0.045+0.12);
+o.connect(g);g.connect(audioCtx.destination);
+o.start(now+i*0.045);o.stop(now+i*0.045+0.13);
+});
+}
 }catch(e){}
 }
+document.addEventListener('click',function(e){
+const btn=e.target.closest('button, a.btn');
+if(!btn)return;
+const txt=btn.textContent;
+if(txt.includes('Добавить в корзину'))playSound('add');
+else if(txt==='✕'||txt.includes('Продолжить'))playSound('remove');
+else if(txt.includes('Корзина')||txt.includes('Оплатить')||txt.includes('Записаться'))playSound('pay');
+else playSound('switch');
+},true);
 const products = [
 {id:1,condition:"new",name:"Pitch мотор для Mavic 3 / 3 Classic / 3T / 3E",desc:"Оригинальный двигатель оси наклона (Pitch) подвеса камеры для линейки DJI Mavic 3, 3 Classic, 3T и 3E.",price:4000,img:"16da6a69-d65d-430f-9086-b4552ec50af9.jpg"},
 {id:2,condition:"new",name:"Yaw мотор для Mavic 3 / 3 Classic / 3T / 3E",desc:"Оригинальный двигатель оси рыскания (Yaw) подвеса камеры для БПЛА DJI Mavic 3, 3 Classic, 3T и 3E.",price:4000,img:"022662dd-4a0b-43c9-889b-8ce42eb367eb.jpg"},
@@ -200,7 +254,7 @@ const img=document.createElement('img');img.src=p.img;img.alt=p.name;
 const h3=document.createElement('h3');h3.textContent=p.name;
 const desc=document.createElement('p');desc.textContent=p.desc;
 const price=document.createElement('div');price.className='price';price.textContent=p.price.toLocaleString('ru-RU')+' ₽';
-const btn=document.createElement('button');btn.className='btn';btn.textContent='Добавить в корзину';btn.onclick=()=>{playClick(720);addToCart(p.id)};
+const btn=document.createElement('button');btn.className='btn';btn.textContent='Добавить в корзину';btn.onclick=()=>{addToCart(p.id)};
 card.append(badge,img,h3,desc,price,btn);list.appendChild(card);
 });
 }
@@ -213,7 +267,7 @@ else{cart.forEach((item,i)=>{
 const row=document.createElement('div');row.className='cart-item';
 const n=document.createElement('span');n.textContent=item.name;
 const r=document.createElement('span');const b=document.createElement('b');b.textContent=item.price.toLocaleString('ru-RU')+' ₽ ';
-const del=document.createElement('button');del.className='remove-btn';del.textContent='✕';del.onclick=()=>{playClick(360);removeFromCart(i)};
+const del=document.createElement('button');del.className='remove-btn';del.textContent='✕';del.onclick=()=>{removeFromCart(i)};
 r.append(b,del);row.append(n,r);box.appendChild(row);
 })}
 document.getElementById('cart-total').innerText=cart.reduce((s,i)=>s+i.price,0).toLocaleString('ru-RU');
