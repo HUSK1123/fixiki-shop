@@ -169,7 +169,9 @@ const products=new Array(
 {id:21,inStock:true,condition:"used",name:"Б/У луч в сборе (задний левый) для Mavic 3 / 3 Classic / 3T / 3E",desc:"Оригинальный Б/У задний левый луч в сборе с мотором и проводкой для DJI Mavic 3, 3 Classic, 3T и 3E. Проверен и полностью исправен.",price:3500,img:"20b66a13-becf-4881-a9cb-e581e20a43ae.jpg"},
 {id:22,inStock:true,condition:"used",name:"Б/У луч в сборе (передний правый) для Mavic 3 / 3 Classic / 3T / 3E",desc:"Оригинальный Б/У передний правый луч в сборе с мотором и антенной для DJI Mavic 3, 3 Classic, 3T и 3E. Проверен и полностью исправен.",price:3500,img:"b0cbce1a-b59e-484b-9b28-07560c21498e.jpg"},
 {id:23,inStock:true,condition:"used",name:"Б/У GPS модуль для Mavic 3 Pro",desc:"Оригинальный модуль спутниковой навигации GPS для БПЛА DJI Mavic 3 Pro (плата PP003297.01). Снят с донора, проверен и полностью исправен.",price:8000,img:"470236ef-b47c-4b01-9411-faa47ad088dd.jpg"},
-{id:24,inStock:true,condition:"used",name:"Б/У GPS модуль для Mavic 3T / 3E",desc:"Оригинальный модуль спутниковой навигации GPS с разъёмом Type-C для DJI Mavic 3 Thermal и Mavic 3 Enterprise (плата PP002964.03). Снят с донора, проверен и полностью исправен.",price:8000,img:"d0d15c83-6174-4724-9558-4aa37e23331a.jpg"}
+{id:24,inStock:true,condition:"used",name:"Б/У GPS модуль для Mavic 3T / 3E",desc:"Оригинальный модуль спутниковой навигации GPS с разъёмом Type-C для DJI Mavic 3 Thermal и Mavic 3 Enterprise (плата PP002964.03). Снят с донора, проверен и полностью исправен.",price:8000,img:"d0d15c83-6174-4724-9558-4aa37e23331a.jpg"},
+{id:25,inStock:true,condition:"new",name:"Пульт DJI RC Pro (RM510B)",desc:"Новый оригинальный пульт управления DJI RC Pro (модель RM510B) со встроенным ярким экраном 5.5 дюймов и внешними антеннами для промышленных и профессиональных БПЛА DJI.",price:20000,img:"d2592ccc-a6e7-43be-b149-0d0ff6f33f27.jpg"}
+
 );
 const savedStock=JSON.parse(localStorage.getItem('fixiki_stock')||'{}');
 products.forEach(p=>{if(savedStock[p.id]!==undefined)p.inStock=savedStock[p.id]});
